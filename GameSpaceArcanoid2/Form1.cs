@@ -26,14 +26,7 @@ namespace GameSpaceArcanoid2
         bool BallIsBottom = true;
         bool IsActiv = true;
 
-        public Form1(int width = 1000, int height = 500)
-        {
-            DoubleBuffered = true;
-            this.Width = width;
-            this.Height = height;
-            new Thread(() => { while (IsActiv) Invalidate(); }).Start();
-            FormClosed += (s, e) => IsActiv = false;
-        }
+        
 
         
         private void Form1_KeyDown_1(object sender, KeyEventArgs e)
@@ -42,7 +35,7 @@ namespace GameSpaceArcanoid2
             {
 
                 Thread.Sleep(100);
-                if (nap1 < 89)
+                if (nap1 < 8)
                 {
                     nap1 += 0.5;
                     if (nap1 < 0)
@@ -102,6 +95,7 @@ namespace GameSpaceArcanoid2
             {
                 label2.Text = "jo";
                 Invalidate();
+                
             };
             timer.Start();
 
@@ -111,6 +105,17 @@ namespace GameSpaceArcanoid2
         }
 
         private void MoveBall(object sender, PaintEventArgs e)
+        {
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+           
+        }
+
+       
+        public void MoveBall()
         {
             if (BallIsBottom == true)
             {
@@ -144,17 +149,6 @@ namespace GameSpaceArcanoid2
             }
             width = panel1.Width;
             height = panel1.Height;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-           
-        }
-
-       
-        public void MoveBall()
-        {
-            
         }
 
     }

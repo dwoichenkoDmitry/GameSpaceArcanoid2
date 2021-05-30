@@ -31,9 +31,9 @@ namespace GameSpaceArcanoid2
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BallImg = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.BallImg = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BallImg)).BeginInit();
             this.SuspendLayout();
@@ -49,15 +49,14 @@ namespace GameSpaceArcanoid2
             this.panel1.Size = new System.Drawing.Size(531, 418);
             this.panel1.TabIndex = 0;
             // 
-            // BallImg
+            // label2
             // 
-            this.BallImg.Image = ((System.Drawing.Image)(resources.GetObject("BallImg.Image")));
-            this.BallImg.Location = new System.Drawing.Point(223, 170);
-            this.BallImg.Name = "BallImg";
-            this.BallImg.Size = new System.Drawing.Size(38, 36);
-            this.BallImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.BallImg.TabIndex = 0;
-            this.BallImg.TabStop = false;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(155, 92);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "label2";
             // 
             // label1
             // 
@@ -68,14 +67,15 @@ namespace GameSpaceArcanoid2
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
-            // label2
+            // BallImg
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(155, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "label2";
+            this.BallImg.Image = ((System.Drawing.Image)(resources.GetObject("BallImg.Image")));
+            this.BallImg.Location = new System.Drawing.Point(226, 312);
+            this.BallImg.Name = "BallImg";
+            this.BallImg.Size = new System.Drawing.Size(38, 36);
+            this.BallImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BallImg.TabIndex = 0;
+            this.BallImg.TabStop = false;
             // 
             // Form1
             // 
