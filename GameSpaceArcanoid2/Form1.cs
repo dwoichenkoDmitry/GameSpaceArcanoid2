@@ -42,7 +42,7 @@ namespace GameSpaceArcanoid2
             {
 
                 Thread.Sleep(100);
-                if (nap1 < 8)
+                if (nap1 < 89)
                 {
                     nap1 += 0.5;
                     if (nap1 < 0)
