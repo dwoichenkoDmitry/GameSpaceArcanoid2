@@ -94,7 +94,7 @@ namespace GameSpaceArcanoid2
             timer.Tick += (sender, args) =>
             {
                 label2.Text = "jo";
-                Invalidate();
+                MoveBall();
                 
             };
             timer.Start();
@@ -117,7 +117,7 @@ namespace GameSpaceArcanoid2
        
         public void MoveBall()
         {
-            if (BallIsBottom == true)
+            if (BallIsBottom == true && !(this.WindowState == FormWindowState.Minimized))
             {
                 double radius = (panel1.Height - 120);
                 LX = (float)((panel1.Width / 2) + radius * Math.Cos(cos));
