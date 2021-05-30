@@ -15,7 +15,7 @@ namespace GameSpaceArcanoid2
 {
     public partial class Form1 : Form
     {
-        int o = 1;
+        
         double sx = 4, sy = 5, bx, by, sin = 1, cos = 0;
 
         double nap1 = 0, width, height;
@@ -24,7 +24,7 @@ namespace GameSpaceArcanoid2
 
         float LX, LY;
         bool BallIsBottom = true;
-        bool IsActiv = true;
+       
 
         
 
@@ -85,6 +85,8 @@ namespace GameSpaceArcanoid2
             
             InitializeComponent();
             
+            InsertMosqits();
+            
 
             bx = BallImg.Left;
             by = BallImg.Top;
@@ -93,21 +95,17 @@ namespace GameSpaceArcanoid2
             timer.Interval = 10;
             timer.Tick += (sender, args) =>
             {
-                label2.Text = "jo";
+                
                 MoveBall();
+                
+                EnemyMove();
+                Invalidate();
                 
             };
             timer.Start();
-
-
-            Paint += MoveBall;
-           
         }
 
-        private void MoveBall(object sender, PaintEventArgs e)
-        {
-            
-        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -127,7 +125,7 @@ namespace GameSpaceArcanoid2
 
                 BallImg.Left = (int)bx;
                 BallImg.Top = (int)by;
-                label1.Text = "jkl";
+                
                 if (BallImg.Top <= 0)
                 {
                     sy *= -1;
@@ -145,11 +143,52 @@ namespace GameSpaceArcanoid2
                     BallImg.Top = panel1.Height - BallImg.Height;
                     BallImg.Left = panel1.Width / 2;
 
+                    CreateEnemys();
+                    
                 }
             }
             width = panel1.Width;
             height = panel1.Height;
         }
 
+        List<PictureBox> mosqits = new List<PictureBox>();
+        private void InsertMosqits()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c is PictureBox && c.Name == "Mosqit")
+                {
+                    PictureBox mosqit = (PictureBox)c;
+                    mosqits.Add(mosqit);
+                }
+            }
+        }
+
+        public void CreateEnemys()
+        {
+            double width = panel1.Width/10;
+            int oneEnemyWidth = (int)Math.Round(width);
+            Random rnd = new Random();
+            int position1 = rnd.Next(1, 10);
+            int position2 = rnd.Next(1, 10);
+            int position3 = rnd.Next(1, 10);
+            List<int> values = new List<int>();
+            values.Add(position1);
+            
+            values.Add(position3);
+            while (values.Contains(position2)) { position2 = rnd.Next(1, 10); }
+            values.Add(position2);
+            while (values.Contains(position3)) { position3 = rnd.Next(1, 10); }
+
+            new Enemy().CreateSprites(this, position1);
+        }
+        private void EnemyMove()
+        {
+            foreach (PictureBox enemy in mosqits)
+            {
+                enemy.Location = new Point(enemy.Location.X, enemy.Location.Y + 5);
+
+            }
+        }
     }
 }
