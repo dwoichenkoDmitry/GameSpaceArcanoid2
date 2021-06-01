@@ -26,9 +26,9 @@ namespace GameSpaceArcanoid2
         private void CreateControl(Form p, int a)
         {
             PictureBox pb = new PictureBox();
-            x = a*width;
+            x = a*10;
             pb.Location = new Point(x, y);
-            pb.Size = new Size(width, height);
+            pb.Size = new Size(50, 42);
             pb.BackgroundImage = Image.FromFile("C:/Users/dwoic/Desktop/Game/GameSpaceArcanoid2/GameSpaceArcanoid2/img/mosqit.png");
             pb.BackgroundImageLayout = ImageLayout.Stretch;
             pb.Name = "Mosqit";

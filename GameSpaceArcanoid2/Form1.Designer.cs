@@ -93,6 +93,7 @@ namespace GameSpaceArcanoid2
             ((System.ComponentModel.ISupportInitialize)(this.BallImg)).EndInit();
             this.ResumeLayout(false);
 
+            CreateEnemys();
         }
 
         #endregion

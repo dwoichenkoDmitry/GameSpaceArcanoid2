@@ -84,7 +84,7 @@ namespace GameSpaceArcanoid2
         {
             
             InitializeComponent();
-            
+            CreateEnemys();
             InsertMosqits();
             
 
@@ -143,8 +143,8 @@ namespace GameSpaceArcanoid2
                     BallImg.Top = panel1.Height - BallImg.Height;
                     BallImg.Left = panel1.Width / 2;
 
+
                     CreateEnemys();
-                    
                 }
             }
             width = panel1.Width;
@@ -166,7 +166,7 @@ namespace GameSpaceArcanoid2
 
         public void CreateEnemys()
         {
-            double width = panel1.Width/10;
+            double width = 25;
             int oneEnemyWidth = (int)Math.Round(width);
             Random rnd = new Random();
             int position1 = rnd.Next(1, 10);
@@ -186,7 +186,7 @@ namespace GameSpaceArcanoid2
         {
             foreach (PictureBox enemy in mosqits)
             {
-                enemy.Location = new Point(enemy.Location.X, enemy.Location.Y + 5);
+                enemy.Location = new Point(enemy.Location.X, enemy.Location.Y + 1);
 
             }
         }
