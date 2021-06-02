@@ -24,20 +24,21 @@ namespace GameSpaceArcanoid2
 
         float LX, LY;
         bool BallIsBottom = true;
-       
 
-        
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
 
-        
+        }
+
         private void Form1_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Right)
             {
 
-                Thread.Sleep(100);
+                
                 if (nap1 < 8)
                 {
-                    nap1 += 0.5;
+                    nap1 += 1;
                     if (nap1 < 0)
                     {
                         nap2 = -10 - nap1;
@@ -49,10 +50,10 @@ namespace GameSpaceArcanoid2
             }
             if (e.KeyCode == Keys.Left)
             {
-                Thread.Sleep(100);
+                
                 if (nap1 > -8)
                 {
-                    nap1 -= 0.5;
+                    nap1 -= 1;
                     if (nap1 < 0)
                     {
                         nap2 = -10 - nap1;
@@ -84,8 +85,8 @@ namespace GameSpaceArcanoid2
         {
             
             InitializeComponent();
-            CreateEnemys();
-            InsertMosqits();
+            
+            
             
 
             bx = BallImg.Left;
@@ -97,12 +98,22 @@ namespace GameSpaceArcanoid2
             {
                 
                 MoveBall();
-                
+                InsertMosqits();
                 EnemyMove();
                 Invalidate();
                 
             };
             timer.Start();
+
+            Paint+= (sender, args)=> { label1.Text = "dav"; };
+
+            var timerSpawnEnemy = new Timer();
+            timerSpawnEnemy.Interval = 5000;
+            timerSpawnEnemy.Tick += (sender, args) =>
+              {
+                  CreateEnemys();
+              };
+            timerSpawnEnemy.Start();
         }
 
 
@@ -144,7 +155,8 @@ namespace GameSpaceArcanoid2
                     BallImg.Left = panel1.Width / 2;
 
 
-                    CreateEnemys();
+                    
+                    
                 }
             }
             width = panel1.Width;
@@ -154,8 +166,10 @@ namespace GameSpaceArcanoid2
         List<PictureBox> mosqits = new List<PictureBox>();
         private void InsertMosqits()
         {
-            foreach (Control c in this.Controls)
+            mosqits.RemoveRange(0, mosqits.Count);
+            foreach (Control c in panel1.Controls)
             {
+                
                 if (c is PictureBox && c.Name == "Mosqit")
                 {
                     PictureBox mosqit = (PictureBox)c;
@@ -163,24 +177,27 @@ namespace GameSpaceArcanoid2
                 }
             }
         }
+        
 
         public void CreateEnemys()
         {
             double width = 25;
             int oneEnemyWidth = (int)Math.Round(width);
             Random rnd = new Random();
-            int position1 = rnd.Next(1, 10);
-            int position2 = rnd.Next(1, 10);
-            int position3 = rnd.Next(1, 10);
+            int position1 = rnd.Next(1, 7);
+            int position2 = rnd.Next(1, 7);
+            int position3 = rnd.Next(1, 7);
             List<int> values = new List<int>();
             values.Add(position1);
             
             values.Add(position3);
-            while (values.Contains(position2)) { position2 = rnd.Next(1, 10); }
+            while (values.Contains(position2)) { position2 = rnd.Next(1, 7); }
             values.Add(position2);
-            while (values.Contains(position3)) { position3 = rnd.Next(1, 10); }
+            while (values.Contains(position3)) { position3 = rnd.Next(1, 7); }
 
-            new Enemy().CreateSprites(this, position1);
+            new Enemy().CreateSprites(panel1, position1, -60);
+            new Enemy().CreateSprites(panel1, position2, -100);
+            new Enemy().CreateSprites(panel1, position3, -150);
         }
         private void EnemyMove()
         {

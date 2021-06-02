@@ -48,6 +48,7 @@ namespace GameSpaceArcanoid2
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(531, 418);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label2
             // 
@@ -93,7 +94,6 @@ namespace GameSpaceArcanoid2
             ((System.ComponentModel.ISupportInitialize)(this.BallImg)).EndInit();
             this.ResumeLayout(false);
 
-            CreateEnemys();
         }
 
         #endregion

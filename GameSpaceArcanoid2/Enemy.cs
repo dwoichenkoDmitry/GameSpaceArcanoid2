@@ -23,11 +23,11 @@ namespace GameSpaceArcanoid2
             x = rnd.Next(0, width * 10);
             y = 0;
         }
-        private void CreateControl(Form p, int a)
+        private void CreateControl(Control p, int a, int h)
         {
             PictureBox pb = new PictureBox();
-            x = a*10;
-            pb.Location = new Point(x, y);
+            x = a*67;
+            pb.Location = new Point(x, h);
             pb.Size = new Size(50, 42);
             pb.BackgroundImage = Image.FromFile("C:/Users/dwoic/Desktop/Game/GameSpaceArcanoid2/GameSpaceArcanoid2/img/mosqit.png");
             pb.BackgroundImageLayout = ImageLayout.Stretch;
@@ -35,9 +35,9 @@ namespace GameSpaceArcanoid2
             p.Controls.Add(pb);
             
         }
-        public void CreateSprites(Form p, int a)
+        public void CreateSprites(Control p, int a, int h)
         {
-            CreateControl(p, a);
+            CreateControl(p, a, h);
         }
         
     }
