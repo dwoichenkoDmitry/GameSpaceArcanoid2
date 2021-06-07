@@ -29,7 +29,7 @@ namespace GameSpaceArcanoid2
             x = a*67;
             pb.Location = new Point(x, h);
             pb.Size = new Size(50, 42);
-            pb.BackgroundImage = Image.FromFile("C:/Users/dwoic/Desktop/Game/GameSpaceArcanoid2/GameSpaceArcanoid2/img/mosqit.png");
+            pb.BackgroundImage = Image.FromFile("C:/Users/Lenovo/source/repos/GameSpaceArcanoid2/GameSpaceArcanoid2/img/mosqit.png");
             pb.BackgroundImageLayout = ImageLayout.Stretch;
             pb.Name = "Mosqit";
             p.Controls.Add(pb);
