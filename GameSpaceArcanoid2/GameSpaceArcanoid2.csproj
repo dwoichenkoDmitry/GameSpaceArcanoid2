@@ -55,7 +55,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Program.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -68,6 +70,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -81,6 +84,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\ball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\boloto.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\imgbin-pepe-the-frog-internet-meme-love-pol-meme-pepe-the-frog-illustration-against-blue-background-fPtP70mhLnbeKAKzcZLrpWiYR.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\mosqit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\pepe.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
