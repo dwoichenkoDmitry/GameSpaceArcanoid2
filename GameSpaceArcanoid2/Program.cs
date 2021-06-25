@@ -6,17 +6,21 @@ using System.Windows.Forms;
 
 namespace GameSpaceArcanoid2
 {
-    static class Program
+    class Program: Form
     {
-        /// <summary>
-        /// Главная точка входа для приложения.
-        /// </summary>
-        [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Program());
+
+        }
+
+        public Program()
+        {
+            Load += (s, e) => 
+            {
+                var controller = new Controller(this);
+                controller.Start();
+            };
         }
     }
 }
