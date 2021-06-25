@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+﻿using System.Windows.Forms;
 namespace GameSpaceArcanoid2
 {
-    class Program: Form
+    public class Program : Form
     {
-        static void Main()
+        public Program(int width, int height)
         {
-            Application.Run(new Program());
-
-        }
-
-        public Program()
-        {
-            Load += (s, e) => 
+            Width = width;
+            Height = height;
+            DoubleBuffered = true;
+            Load += ((sender, args) =>
             {
                 var controller = new Controller(this);
                 controller.Start();
-            };
+            });
+
+        }
+        public static void Main()
+        {
+            Application.Run(new Program(600, 500));
         }
     }
 }

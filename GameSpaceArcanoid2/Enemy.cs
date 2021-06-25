@@ -1,44 +1,46 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Input;
-using static System.Windows.Forms.Control;
-
-
 namespace GameSpaceArcanoid2
 {
-    class Enemy
+    public class Enemy
     {
-        
-        private int width, height, x, y;
-        Random rnd = new Random();
-        public void Enemies()
+        private Control _control;
+        public PictureBox Img = new PictureBox();
+        private int speed = 2;
+        public Enemy(Control control)
         {
-            width = 50;
-            height = 42;
-            x = rnd.Next(0, width * 10);
-            y = 0;
+            _control = control;
+            InitializeComponent();
         }
-        private void CreateControl(Control p, int a, int h)
+        public void Move()
         {
-            PictureBox pb = new PictureBox();
-            x = a*67;
-            pb.Location = new Point(x, h);
-            pb.Size = new Size(50, 42);
-            pb.BackgroundImage = Image.FromFile("C:/Users/dwoic/Desktop/Game/GameSpaceArcanoid2/GameSpaceArcanoid2/img/mosqit.png");
-            pb.BackgroundImageLayout = ImageLayout.Stretch;
-            pb.Name = "Mosqit";
-            p.Controls.Add(pb);
-            
+            Img.Top += speed;
+            if (Img.Top >= _control.Bottom)
+                ChangeLocation();
         }
-        public void CreateSprites(Control p, int a, int h)
+        private void InitializeComponent()
         {
-            CreateControl(p, a, h);
+            rnd = new Random();
+            Img.Image = Properties.Resources.mosqit;
+            Img.Size = new Size(30, 30);
+            Img.SizeMode = PictureBoxSizeMode.StretchImage;
+            ChangeLocation();
+            _control.Controls.Add(Img);
         }
-        
+
+        public void Delete()
+        {
+            ChangeLocation();
+        }
+
+        private Random rnd;
+
+        private void ChangeLocation()
+        {
+            var x = rnd.Next();
+            var y = -Img.Height;
+            Img.Location = new Point(x, y);
+        }
     }
 }
