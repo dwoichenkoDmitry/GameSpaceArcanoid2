@@ -9,29 +9,44 @@ namespace GameSpaceArcanoid2
 {
     public class Controller
     {
-        private Control _control;
+        private Form _control;
         private Ball _ball;
         private List<Enemy> _enemies;
         private int score = 0;
+
+        Label lab;
+
         private Dictionary<Keys, Action> PressKey;
-        public Controller(Control control)
+        private bool isActive = false;
+        public Controller(Form control, Label lable)
         {
             _control = control;
-            _control.Paint += OnPaint;
+            lab = lable;
+            timer.Tick += (s, e) =>
+            {
+                if (isActive)
+                    Update();
+            };
+            timer.Interval = 4;
+            timer.Start();
+
+
+
             _ball = new Ball(_control);
+
             _enemies = new List<Enemy>() { new Enemy(_control) };
             PressKey = new Dictionary<Keys, Action>()
             {
-            { Keys.Right, () => _ball.DirectionX += 1 },
-            { Keys.Left, () => _ball.DirectionX -= 1 },
-            { Keys.Space, () =>
-            {
-
-             if (_ball.IsFlying)
-                    _ball.StopFlight();
-                else
-                    _ball.IsFlying = true;
-            }
+                { Keys.Right, () => _ball.DirectionX += 1 },
+                { Keys.Left, () => _ball.DirectionX -= 1 },
+                { Keys.Space, () =>
+                    {
+                        if (_ball.StateMoving is Ball.StateMove.Fly)
+                            _ball.StopFlight();
+                        else if (_ball.StateMoving is Ball.StateMove.Stoped)
+                            _ball.StateMoving = Ball.StateMove.Fly;
+                        Frog.PaintFrog(Ball.Img.Left-Ball.Img.Width/2-50);
+                    }
                 }
             };
             _control.KeyDown += (s, e) =>
@@ -41,52 +56,62 @@ namespace GameSpaceArcanoid2
             };
         }
 
+        public Timer timer = new Timer();
+
         public void Start()
         {
-            var timer = new Timer();
-            timer.Interval = 10;
-            timer.Tick += (s, e) => Update();
-            timer.Tick += (s, e) => _control.Invalidate();
-            timer.Start();
+            if (!isActive)
+            {
+                isActive = true;
+            }
         }
+
+        public void Stop()
+        {
+            isActive = false;
+        }
+
+        public void CheckWindow()
+        {
+            if (_control.WindowState == FormWindowState.Minimized)
+            {
+                Stop();
+            }
+        }
+
 
         private Queue<Enemy> _queueEnemysAdd = new Queue<Enemy>();
         private Queue<Enemy> _queueEnemysDelete = new Queue<Enemy>();
         private void Update()
         {
-           if (_ball.IsFlying)
+            if (_ball.StateMoving is Ball.StateMove.Fly)
                 _ball.Move();
             foreach (var e in _enemies)
             {
                 e.Move();
-                if (Collider.OnTriger(_ball.Img, e.Img))
+                if (Collider.OnTriger(Ball.Img, e.Img))
                 {
                     e.Delete();
                     score = score + 1;
-                    if (F(_enemies.Count, (x) => x * x))
-                        _queueEnemysAdd.Enqueue(new Enemy(_control));
+                    lab.Text = $"Счёт: {score}";
+                    if (F(_enemies.Count, score, (x) => x * x))
+                    {
+                        _queueEnemysAdd.Enqueue(new Enemy(_control, 1000));
+                    }
                 }
             }
             while (_queueEnemysAdd.Count != 0)
                 _enemies.Add(_queueEnemysAdd.Dequeue());
         }
 
-        private bool F(int X, Func<int, int> Y)
-        {
-            return Y(X) < score;
-        }
+        private bool F(int X, int Y, Func<int, int> F)
+            => F(X + 1) == Y;
+
         private Font _font = new Font(FontFamily.GenericSerif, 12);
         private Brush _brush = new SolidBrush(Color.Black);
         private PointF _labelPositionX = new PointF(10, 20);
         private PointF _labelPositionY = new PointF(10, 35);
 
-        private void OnPaint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(Color.White);
-            e.Graphics.DrawString($"x : {_ball.DirectionX}", _font, _brush, _labelPositionX);
-            e.Graphics.DrawString($"y : {_ball.DirectionY}", _font, _brush, _labelPositionY);
-            e.Graphics.DrawString($"score : {score}", _font, _brush, new PointF(10, 55));
-        }
     }
 
     public static class Collider
