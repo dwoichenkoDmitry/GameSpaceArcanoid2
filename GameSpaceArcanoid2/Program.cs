@@ -23,6 +23,7 @@ namespace GameSpaceArcanoid2
                     control = new Controller(this, this.label1, this.label2);
 
                 control.Start();
+                Closed += (s, e) => control.Stop();
             });
         }
         public static void Main()
@@ -67,8 +68,14 @@ namespace GameSpaceArcanoid2
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Program";
+            this.Load += new System.EventHandler(this.Program_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
+        }
+
+        private void Program_Load(object sender, System.EventArgs e)
+        {
 
         }
     }

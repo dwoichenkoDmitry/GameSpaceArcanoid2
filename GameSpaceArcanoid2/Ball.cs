@@ -119,6 +119,7 @@ namespace GameSpaceArcanoid2
                     _directionY = -_directionY;
                     StopFlight();
                     Frog.PaintFrog(Img.Left - Img.Width / 2 - 50);
+                    Frog.ChangeImg(DirectionX);
                 }
             }
         }

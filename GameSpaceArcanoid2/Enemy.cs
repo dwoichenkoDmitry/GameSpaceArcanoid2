@@ -37,7 +37,7 @@ namespace GameSpaceArcanoid2
                     
                     
                     _control.Close();
-                    MessageBox.Show("Собоезнуем, но вы проиграли! \n Попробуйте ещё раз");
+                    MenuForm.GetTextBox().Text = "Вы проиграли";
                     Controller.Lifes = 10;
                 }
             }

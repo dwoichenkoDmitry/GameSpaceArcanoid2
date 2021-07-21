@@ -9,17 +9,23 @@ namespace GameSpaceArcanoid2
 {
     class MenuForm: Form
     {
-        public Label lab;
+        
         
         private TableLayoutPanel tableLayoutPanel1;
         private Button button1;
         private Label label1;
+        public static TextBox textBox6;
         private Button buttonStart;
 
         public MenuForm()
         {
             InitializeComponent();
 
+        }
+
+        public static TextBox GetTextBox()
+        {
+            return textBox6;
         }
 
         private void InitializeComponent()
@@ -29,6 +35,7 @@ namespace GameSpaceArcanoid2
             this.buttonStart = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            textBox6 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +49,8 @@ namespace GameSpaceArcanoid2
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.buttonStart, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(textBox6, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -52,6 +60,7 @@ namespace GameSpaceArcanoid2
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(563, 349);
             this.tableLayoutPanel1.TabIndex = 1;
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // buttonStart
             // 
@@ -80,10 +89,19 @@ namespace GameSpaceArcanoid2
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(166, 0);
+            this.label1.Location = new System.Drawing.Point(166, 225);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 2;
+            // 
+            // textBox6
+            // 
+            textBox6.Enabled = false;
+            textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            textBox6.Location = new System.Drawing.Point(166, 3);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new System.Drawing.Size(231, 24);
+            textBox6.TabIndex = 3;
             // 
             // MenuForm
             // 
@@ -96,10 +114,6 @@ namespace GameSpaceArcanoid2
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
-
-
-
-
         }
 
         private void OpenGame(object sender, EventArgs e)
@@ -110,6 +124,11 @@ namespace GameSpaceArcanoid2
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

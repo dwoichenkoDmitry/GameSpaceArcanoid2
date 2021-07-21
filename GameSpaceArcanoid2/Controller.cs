@@ -13,6 +13,7 @@ namespace GameSpaceArcanoid2
         private Ball _ball;
         private List<Enemy> _enemies;
         private int score = 0;
+        
 
         Label lab;
         public static Label LabelLive;
@@ -33,7 +34,7 @@ namespace GameSpaceArcanoid2
             timer.Interval = 4;
             timer.Start();
 
-
+            
 
             _ball = new Ball(_control);
 
@@ -63,7 +64,10 @@ namespace GameSpaceArcanoid2
                             _ball.StopFlight();
                         else if (_ball.StateMoving is Ball.StateMove.Stoped)
                             _ball.StateMoving = Ball.StateMove.Fly;
+                        
                         Frog.PaintFrog(Ball.Img.Left-Ball.Img.Width/2-50);
+                        Frog.ChangeImg(_ball.DirectionX);
+                        
                     }
                 }
 
@@ -88,6 +92,7 @@ namespace GameSpaceArcanoid2
         public void Stop()
         {
             isActive = false;
+            timer.Stop();
         }
 
         public void CheckWindow()
@@ -115,9 +120,8 @@ namespace GameSpaceArcanoid2
                     lab.Text = $"Счёт: {score}";
                     if(score == 30)
                     {
-                        MessageBox.Show("Поздравляем, вы победили!\n Ваш счёт 30 очков!");
-                        
                         _control.Close();
+                        MenuForm.GetTextBox().Text = "Вы победили!";
                     }
                     if (F(_enemies.Count, score, (x) => x * x))
                     {
@@ -133,10 +137,7 @@ namespace GameSpaceArcanoid2
         private bool F(int X, int Y, Func<int, int> F)
             => F(X + 1) == Y;
 
-        private Font _font = new Font(FontFamily.GenericSerif, 12);
-        private Brush _brush = new SolidBrush(Color.Black);
-        private PointF _labelPositionX = new PointF(10, 20);
-        private PointF _labelPositionY = new PointF(10, 35);
+        
 
     }
 
