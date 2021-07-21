@@ -284,6 +284,16 @@ namespace GameSpaceArcanoid2.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap komar {
+            get {
+                object obj = ResourceManager.GetObject("komar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mosqit {
             get {
                 object obj = ResourceManager.GetObject("mosqit", resourceCulture);

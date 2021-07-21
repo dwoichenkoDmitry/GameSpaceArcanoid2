@@ -15,13 +15,16 @@ namespace GameSpaceArcanoid2
         private int score = 0;
 
         Label lab;
+        public static Label LabelLive;
+        
 
         private Dictionary<Keys, Action> PressKey;
         private bool isActive = false;
-        public Controller(Form control, Label lable)
+        public Controller(Form control, Label lable, Label labelLifes)
         {
             _control = control;
             lab = lable;
+            LabelLive = labelLifes;
             timer.Tick += (s, e) =>
             {
                 if (isActive)
@@ -37,8 +40,23 @@ namespace GameSpaceArcanoid2
             _enemies = new List<Enemy>() { new Enemy(_control) };
             PressKey = new Dictionary<Keys, Action>()
             {
-                { Keys.Right, () => _ball.DirectionX += 1 },
-                { Keys.Left, () => _ball.DirectionX -= 1 },
+                { Keys.Right, () => {
+                    _ball.DirectionX += 1;
+                    Frog.ChangeImg(_ball.DirectionX);
+
+                    } 
+                
+                },
+                { Keys.Left, () =>{
+                    _ball.DirectionX -= 1 ;
+                    Frog.ChangeImg(_ball.DirectionX);
+
+                    } },
+                {Keys.Escape, () =>
+                {
+                    _control.Close();
+                    Controller.Lifes = 10;
+                } },
                 { Keys.Space, () =>
                     {
                         if (_ball.StateMoving is Ball.StateMove.Fly)
@@ -48,6 +66,7 @@ namespace GameSpaceArcanoid2
                         Frog.PaintFrog(Ball.Img.Left-Ball.Img.Width/2-50);
                     }
                 }
+
             };
             _control.KeyDown += (s, e) =>
             {
@@ -79,7 +98,7 @@ namespace GameSpaceArcanoid2
             }
         }
 
-
+        public static int Lifes = 10; 
         private Queue<Enemy> _queueEnemysAdd = new Queue<Enemy>();
         private Queue<Enemy> _queueEnemysDelete = new Queue<Enemy>();
         private void Update()
@@ -92,13 +111,20 @@ namespace GameSpaceArcanoid2
                 if (Collider.OnTriger(Ball.Img, e.Img))
                 {
                     e.Delete();
-                    score = score + 1;
+                    score = score + 5;
                     lab.Text = $"Счёт: {score}";
+                    if(score == 30)
+                    {
+                        MessageBox.Show("Поздравляем, вы победили!\n Ваш счёт 30 очков!");
+                        
+                        _control.Close();
+                    }
                     if (F(_enemies.Count, score, (x) => x * x))
                     {
                         _queueEnemysAdd.Enqueue(new Enemy(_control, 1000));
                     }
                 }
+                
             }
             while (_queueEnemysAdd.Count != 0)
                 _enemies.Add(_queueEnemysAdd.Dequeue());

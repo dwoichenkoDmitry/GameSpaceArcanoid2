@@ -133,6 +133,9 @@
   <data name="imgbin_pepe_the_frog_internet_meme_love_pol_meme_pepe_the_frog_illustration_against_blue_background_fPtP70mhLnbeKAKzcZLrpWiYR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\imgbin-pepe-the-frog-internet-meme-love-pol-meme-pepe-the-frog-illustration-against-blue-background-fPtP70mhLnbeKAKzcZLrpWiYR.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="komar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\komar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="mosqit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\mosqit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

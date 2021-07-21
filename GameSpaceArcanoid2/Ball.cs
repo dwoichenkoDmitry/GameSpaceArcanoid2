@@ -35,7 +35,7 @@ namespace GameSpaceArcanoid2
                     _moveState.y = _directionY >= 0
                         ? MoveStateY.Down
                         : MoveStateY.Up;
-                    Frog.ChangeImg(_directionX);
+                    
                 }
             }
         }

@@ -5,33 +5,35 @@ namespace GameSpaceArcanoid2
     public class Program : Form
     {
         public Label label1;
+        public Label label2;
         public Controller control;
 
         public Program(int width, int height)
         {
             InitializeComponent();
+
             Width = width;
             Height = height;
-
-
+            WindowState = FormWindowState.Maximized;
 
             DoubleBuffered = true;
             Load += ((sender, args) =>
             {
                 if (control == null)
-                    control = new Controller(this, this.label1);
+                    control = new Controller(this, this.label1, this.label2);
 
                 control.Start();
             });
         }
         public static void Main()
         {
-            Application.Run(new Program(600, 500));
+            Application.Run(new MenuForm());
         }
 
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -45,12 +47,25 @@ namespace GameSpaceArcanoid2
             this.label1.Size = new System.Drawing.Size(0, 29);
             this.label1.TabIndex = 0;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.ForeColor = System.Drawing.Color.DarkRed;
+            this.label2.Location = new System.Drawing.Point(22, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 25);
+            this.label2.TabIndex = 1;
+            // 
             // Program
             // 
             this.BackgroundImage = global::GameSpaceArcanoid2.Properties.Resources.bolot;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(461, 358);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Program";
             this.ResumeLayout(false);
             this.PerformLayout();

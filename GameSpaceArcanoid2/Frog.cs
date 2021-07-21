@@ -51,6 +51,7 @@ namespace GameSpaceArcanoid2
             ImgFrog.BackColor = Color.Transparent;
             ImgFrog.Size = new Size(150, 150);
             ImgFrog.SizeMode = PictureBoxSizeMode.StretchImage;
+            ImgFrog.BringToFront();
         }
 
         public static void PaintFrog(int x)

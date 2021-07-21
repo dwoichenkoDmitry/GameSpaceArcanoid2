@@ -27,15 +27,32 @@ namespace GameSpaceArcanoid2
         {
             Img.Top += speed;
             if (Img.Top >= _control.Bottom && _control.WindowState != FormWindowState.Minimized)
+            {
                 ChangeLocation();
+                Controller.Lifes -= 1;
+                Controller.LabelLive.Text = $"Жизней осталось {Controller.Lifes}";
+                if (Controller.Lifes == 0)
+                {
+                    
+                    
+                    
+                    _control.Close();
+                    MessageBox.Show("Собоезнуем, но вы проиграли! \n Попробуйте ещё раз");
+                    Controller.Lifes = 10;
+                }
+            }
+
         }
 
         private Random rnd = new Random();
         private void InitializeComponent()
         {
-            Img.Image = Properties.Resources.mosqit;
-            Img.Size = new Size(30, 30);
+            Img.Image = Properties.Resources.komar;
+            Img.BackColor = Color.Transparent;
+            Img.Size = new Size(60, 60);
             Img.SizeMode = PictureBoxSizeMode.StretchImage;
+            Img.Name = "Mosqit";
+
             ChangeLocation();
             _control.Controls.Add(Img);
         }
