@@ -273,6 +273,16 @@ namespace GameSpaceArcanoid2.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hole {
+            get {
+                object obj = ResourceManager.GetObject("hole", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap imgbin_pepe_the_frog_internet_meme_love_pol_meme_pepe_the_frog_illustration_against_blue_background_fPtP70mhLnbeKAKzcZLrpWiYR {
             get {
                 object obj = ResourceManager.GetObject("imgbin_pepe_the_frog_internet_meme_love_pol_meme_pepe_the_frog_illustration_again" +

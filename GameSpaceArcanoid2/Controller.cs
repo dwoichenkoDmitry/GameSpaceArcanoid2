@@ -17,6 +17,7 @@ namespace GameSpaceArcanoid2
 
         Label lab;
         public static Label LabelLive;
+        private PictureBox Img = new PictureBox();
         
 
         private Dictionary<Keys, Action> PressKey;
@@ -105,7 +106,8 @@ namespace GameSpaceArcanoid2
 
         public static int Lifes = 10; 
         private Queue<Enemy> _queueEnemysAdd = new Queue<Enemy>();
-        private Queue<Enemy> _queueEnemysDelete = new Queue<Enemy>();
+       
+        
         private void Update()
         {
             if (_ball.StateMoving is Ball.StateMove.Fly)
@@ -126,6 +128,35 @@ namespace GameSpaceArcanoid2
                     if (F(_enemies.Count, score, (x) => x * x))
                     {
                         _queueEnemysAdd.Enqueue(new Enemy(_control, 1000));
+                    }
+                    Random rnd = new Random();
+
+                    int value = rnd.Next(0,2);
+                    
+                    if(value == 1 && Enemy.StateFly == Enemy.FlyStatus.Standart)
+                    {
+                        Enemy.StateFly = Enemy.FlyStatus.Gravitation;
+                        Img.Image = Properties.Resources.hole;
+                        Img.BackColor = Color.Transparent;
+                        Img.Size = new Size(150, 150);
+                        Img.SizeMode = PictureBoxSizeMode.StretchImage;
+                        Img.Location = new Point(rnd.Next(0, _control.Width), rnd.Next(0, _control.Height - 230));
+                        Img.Name = "Hole";
+                        _control.Controls.Add(Img);
+
+                         Enemy.MosqitWay = Algoritm.FindPaths(_control.Width,
+                            _control.Height, Img.Location,
+                            e.CheckMosqit());
+                        
+                        
+                           var GravityTimer = new Timer();
+                        GravityTimer.Interval = 10000;
+                        GravityTimer.Tick += (sender, args) =>
+                        {
+                            Enemy.StateFly = Enemy.FlyStatus.Standart;
+                            GravityTimer.Stop();
+                        };
+                        GravityTimer.Start();
                     }
                 }
                 

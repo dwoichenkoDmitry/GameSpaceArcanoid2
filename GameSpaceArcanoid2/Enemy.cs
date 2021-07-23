@@ -9,6 +9,10 @@ namespace GameSpaceArcanoid2
         private Form _control;
         public PictureBox Img = new PictureBox();
         private int speed = 2;
+        
+        public static FlyStatus StateFly = FlyStatus.Standart;
+        public static SinglyLinkedList<Point> MosqitWay;
+        public static Point MosqitPosition;
 
         public Enemy(Form control)
         {
@@ -25,23 +29,30 @@ namespace GameSpaceArcanoid2
 
         public void Move()
         {
-            Img.Top += speed;
-            if (Img.Top >= _control.Bottom && _control.WindowState != FormWindowState.Minimized)
+            if (FlyStatus.Standart == StateFly)
             {
-                ChangeLocation();
-                Controller.Lifes -= 1;
-                Controller.LabelLive.Text = $"Жизней осталось {Controller.Lifes}";
-                if (Controller.Lifes == 0)
+                Img.Top += speed;
+                if (Img.Top >= _control.Bottom && _control.WindowState != FormWindowState.Minimized)
                 {
-                    
-                    
-                    
-                    _control.Close();
-                    MenuForm.GetTextBox().Text = "Вы проиграли";
-                    Controller.Lifes = 10;
+                    ChangeLocation();
+                    Controller.Lifes -= 1;
+                    Controller.LabelLive.Text = $"Жизней осталось {Controller.Lifes}";
+                    if (Controller.Lifes == 0)
+                    {
+                        _control.Close();
+                        MenuForm.GetTextBox().Text = "Вы проиграли";
+                        Controller.Lifes = 10;
+                    }
                 }
             }
-
+            else
+            {
+                if (MosqitWay.Previous != null)
+                {
+                    MosqitWay = MosqitWay.Previous;
+                    Img.Location = MosqitWay.Value;
+                }
+            }
         }
 
         private Random rnd = new Random();
@@ -62,11 +73,22 @@ namespace GameSpaceArcanoid2
             ChangeLocation();
         }
 
+        public Point CheckMosqit()
+        {
+            return Img.Location;
+        }
+
         private void ChangeLocation()
         {
             var x = rnd.Next(0, _control.Width - Img.Width);
             var y = -Img.Height;
             Img.Location = new Point(x, y);
+        }
+
+        public enum FlyStatus
+        {
+            Standart,
+            Gravitation
         }
     }
 }
