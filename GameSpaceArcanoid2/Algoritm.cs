@@ -17,7 +17,7 @@ namespace GameSpaceArcanoid2
             var crawlPoints = new Queue<Point>();
             crawlPoints.Enqueue(start);
             visitedPoint.Add(start);
-            int a = 0;
+            
             way.Add(start, new SinglyLinkedList<Point>(start));
             Console.WriteLine(start);
             Console.WriteLine(destination);
