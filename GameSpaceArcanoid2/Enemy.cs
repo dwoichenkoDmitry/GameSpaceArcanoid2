@@ -39,9 +39,10 @@ namespace GameSpaceArcanoid2
                     Controller.LabelLive.Text = $"Жизней осталось {Controller.Lifes}";
                     if (Controller.Lifes == 0)
                     {
+                        Controller.Lifes = 10;
                         _control.Close();
                         MenuForm.GetTextBox().Text = "Вы проиграли";
-                        Controller.Lifes = 10;
+                        
                     }
                 }
             }

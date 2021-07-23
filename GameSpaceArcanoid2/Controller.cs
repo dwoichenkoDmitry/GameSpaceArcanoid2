@@ -122,6 +122,8 @@ namespace GameSpaceArcanoid2
                     lab.Text = $"Счёт: {score}";
                     if(score == 30)
                     {
+                        Controller.Lifes = 10;
+                        Enemy.StateFly = Enemy.FlyStatus.Standart;
                         _control.Close();
                         MenuForm.GetTextBox().Text = "Вы победили!";
                     }
@@ -136,6 +138,7 @@ namespace GameSpaceArcanoid2
                     if(value == 1 && Enemy.StateFly == Enemy.FlyStatus.Standart)
                     {
                         Enemy.StateFly = Enemy.FlyStatus.Gravitation;
+                        Img = new PictureBox();
                         Img.Image = Properties.Resources.hole;
                         Img.BackColor = Color.Transparent;
                         Img.Size = new Size(150, 150);
@@ -154,6 +157,7 @@ namespace GameSpaceArcanoid2
                         GravityTimer.Tick += (sender, args) =>
                         {
                             Enemy.StateFly = Enemy.FlyStatus.Standart;
+                            Img.Dispose();
                             GravityTimer.Stop();
                         };
                         GravityTimer.Start();
