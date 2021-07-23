@@ -78,12 +78,12 @@ namespace GameSpaceArcanoid2
                 StateMoving = StateMove.Fall;
                 new Thread(o =>
                 {
-                    //while (Img.Top < _control.Height - 38 - Img.Height)
-                    //{
-                    //    Img.Top += 10;
-                    //    Thread.Sleep(10);
-                    //}
-                    //Img.Top = _control.Height - 38 - Img.Height;
+                    while (Img.Top < _control.Height - 38 - Img.Height)
+                    {
+                        Img.Top += 10;
+                        Thread.Sleep(10);
+                    }
+                    Img.Top = _control.Height - 38 - Img.Height;
                     _moveState.y = MoveStateY.Up;
                     _directionY = -Math.Abs(_directionY);
                     StateMoving = StateMove.Stoped;
